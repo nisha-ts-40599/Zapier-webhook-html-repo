@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Information Form</title>
+</head>
+<body>
+    <h1>Submit Employee Information</h1>
+    <form id="webhookForm" action="https://hooks.zapier.com/hooks/catch/20085874/2h8ut0g/" method="POST">
+        <label for="first_name">First Name:</label><br>
+        <input type="text" id="first_name" name="first_name" required><br><br>
+
+        <label for="last_name">Last Name:</label><br>
+        <input type="text" id="last_name" name="last_name" required><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="job_title">Job Title:</label><br>
+        <input type="text" id="job_title" name="job_title" required><br><br>
+
+        <label for="company_name">Current Organization:</label><br>
+        <input type="text" id="org_name" name="org_name" required><br><br>
+
+        <label for="company_name">Current Job Role:</label><br>
+        <input type="text" id="job_name" name="job_name" required><br><br>
+
+        <label for="experiance">Experiance:</label><br>
+        <select id="exp" name="exp" required>
+            <option value="0-1">0-1</option>
+            <option value="1-5">1-5</option>
+            <option value="5-10">5-10</option>
+            <option value="10-15">10-15</option>
+            <option value="15-20">15-20</option>
+        </select><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        // Prevent the form from reloading the page after submission
+        const form = document.getElementById('webhookForm');
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Form successfully submitted!');
+                    form.reset();
+                } else {
+                    alert('Form submission failed. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error submitting the form.');
+            });
+        });
+    </script>
+</body>
+</html>
